@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Online registration portal for the SIMATS Tech Symposium 2026">
+<title>SIMATS Tech Symposium 2026</title>
+<style>
+:root{--bg:#f3f6f4;--ink:#12261f;--muted:#4c6159;--card:#fff;--line:#cfdad4;--brand:#0f5c4a;--brand-ink:#fff;--accent:#e0a526;--err:#b3261e;--ok:#146c3b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1815;--ink:#e6f0eb;--muted:#9bb2a9;--card:#16241f;--line:#2a3d36;--brand:#4fc3a1;--brand-ink:#08221a;--accent:#e8b94a;--err:#ff8a80;--ok:#6fdc9d}}
+:root[data-theme="dark"]{--bg:#0e1815;--ink:#e6f0eb;--muted:#9bb2a9;--card:#16241f;--line:#2a3d36;--brand:#4fc3a1;--brand-ink:#08221a;--accent:#e8b94a;--err:#ff8a80;--ok:#6fdc9d}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
+h1,h2,h3,nav,button,label,input,select,textarea,th{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--brand);color:var(--brand-ink);padding:.5rem 1rem;z-index:9}
+.skip:focus{left:0}
+header.site{background:var(--brand);color:var(--brand-ink)}
+.wrap{max-width:960px;margin:0 auto;padding:0 1rem}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;padding:.8rem 0}
+.logo{font:700 1.2rem system-ui,sans-serif;color:inherit;text-decoration:none}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.25rem;margin:0;padding:0}
+nav a{display:block;padding:.5rem .8rem;border-radius:6px;color:inherit;text-decoration:none;font-weight:600}
+nav a:hover{background:rgba(255,255,255,.18)}
+nav a[aria-current="page"]{background:var(--accent);color:#1b1500}
+main{padding:2rem 0 3rem;min-height:60vh}
+.page{display:none}.page.active{display:block}
+h1{font-size:clamp(1.9rem,5vw,3rem);line-height:1.15;margin:.2em 0}
+h2{margin-top:1.8rem}
+.lead{font-size:1.2rem;color:var(--muted);max-width:60ch}
+.btn{display:inline-block;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.7rem 1.3rem;font:600 1rem system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.btn.alt{background:transparent;color:var(--brand);border:2px solid var(--brand)}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+article.card,aside.card,.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem}
+.card h3{margin:.1em 0 .4em}
+.tag{display:inline-block;background:var(--accent);color:#1b1500;font:600 .8rem system-ui,sans-serif;padding:.1rem .5rem;border-radius:99px}
+.facts{display:flex;flex-wrap:wrap;gap:1.5rem;margin:1.5rem 0;padding:0;list-style:none}
+.facts strong{display:block;font:700 1.6rem system-ui,sans-serif;color:var(--brand)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;background:var(--card)}
+caption{text-align:left;padding:.5rem 0;font-weight:600}
+th,td{border:1px solid var(--line);padding:.6rem .8rem;text-align:left}
+thead th{background:var(--brand);color:var(--brand-ink)}
+form{max-width:560px}
+.field{margin-bottom:1rem}
+label{display:block;font-weight:600;margin-bottom:.25rem}
+.hint{font:.85rem system-ui,sans-serif;color:var(--muted);margin:.2rem 0 0}
+input,select,textarea{width:100%;padding:.65rem;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:1rem system-ui,sans-serif}
+input:invalid:not(:placeholder-shown){border-color:var(--err)}
+fieldset{border:1px solid var(--line);border-radius:10px;margin:0 0 1rem;padding:1rem}
+legend{font-weight:700;padding:0 .4rem;font-family:system-ui,sans-serif}
+.check{display:flex;gap:.6rem;align-items:center;font-weight:400}
+.check input{width:auto}
+.msg{border-radius:8px;padding:.8rem 1rem;margin-top:1rem}
+.msg.err{border:2px solid var(--err);color:var(--err)}
+.msg.ok{border:2px solid var(--ok)}
+pre{background:#0d1b16;color:#c9f3e2;padding:1rem;border-radius:8px;overflow-x:auto;font-size:.85rem;white-space:pre-wrap;word-break:break-word}
+details{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.7rem 1rem;margin-bottom:.6rem}
+summary{cursor:pointer;font:600 1rem system-ui,sans-serif}
+footer.site{border-top:1px solid var(--line);padding:1.2rem 0;color:var(--muted);font:.9rem system-ui,sans-serif}
+.themebtn{background:transparent;border:1px solid currentColor;color:inherit;border-radius:6px;padding:.35rem .7rem;cursor:pointer;font:600 .85rem system-ui,sans-serif}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="site">
+<div class="wrap top">
+  <a class="logo" href="#/home">SIMATS Tech Symposium 2026</a>
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="#/home" data-nav="home">Home</a></li>
+      <li><a href="#/events" data-nav="events">Events</a></li>
+      <li><a href="#/schedule" data-nav="schedule">Schedule</a></li>
+      <li><a href="#/register" data-nav="register">Register</a></li>
+      <li><a href="#/faq" data-nav="faq">FAQ</a></li>
+      <li><a href="#/contact" data-nav="contact">Contact</a></li>
+    </ul>
+  </nav>
+  <button class="themebtn" id="theme" type="button" aria-pressed="false">Toggle dark mode</button>
+</div>
+</header>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+<!-- HOME -->
+<section class="page" id="page-home" aria-labelledby="h-home">
+  <h1 id="h-home">Build, break and present at SIMATS Tech Symposium 2026</h1>
+  <p class="lead">A two-day inter-college symposium with technical paper presentations, hackathons, workshops and project expos. Registration is open to all engineering students.</p>
+  <p><a class="btn" href="#/register">Register now</a> <a class="btn alt" href="#/events">Browse events</a></p>
+  <ul class="facts">
+    <li><strong>2 days</strong>14 – 15 November 2026</li>
+    <li><strong>6 events</strong>Technical and non-technical</li>
+    <li><strong>Free</strong>Lunch and certificate included</li>
+  </ul>
+  <h2>Why attend</h2>
+  <div class="grid">
+    <article class="card"><h3>Present your work</h3><p>Share papers and projects with faculty and industry reviewers.</p></article>
+    <article class="card"><h3>Learn by doing</h3><p>Hands-on workshops on web development, cloud and AI.</p></article>
+    <article class="card"><h3>Meet peers</h3><p>Teams from colleges across Tamil Nadu take part.</p></article>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="page" id="page-events" aria-labelledby="h-events">
+  <h1 id="h-events">Events</h1>
+  <p class="lead">Pick up to three events when you register.</p>
+  <div class="grid">
+    <article class="card"><span class="tag">Technical</span><h3>Paper Presentation</h3><p>Present a 7-minute talk on your research. Teams of 1–2.</p></article>
+    <article class="card"><span class="tag">Technical</span><h3>24-hour Hackathon</h3><p>Build a working prototype for a real problem statement. Teams of 2–4.</p></article>
+    <article class="card"><span class="tag">Technical</span><h3>Web Design Challenge</h3><p>Design and code a responsive page from a brief, live. Individual.</p></article>
+    <article class="card"><span class="tag">Workshop</span><h3>Cloud and DevOps Basics</h3><p>Deploy an app end to end. Laptop required.</p></article>
+    <article class="card"><span class="tag">Technical</span><h3>Tech Quiz</h3><p>Rounds on programming, networks and general tech. Teams of 2.</p></article>
+    <article class="card"><span class="tag">Fun</span><h3>Project Expo</h3><p>Show your final-year or mini project at a stall.</p></article>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="page" id="page-schedule" aria-labelledby="h-schedule">
+  <h1 id="h-schedule">Schedule</h1>
+  <div class="tablewrap">
+  <table>
+    <caption>Programme for 14 and 15 November 2026</caption>
+    <thead><tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Session</th><th scope="col">Venue</th></tr></thead>
+    <tbody>
+      <tr><td>Day 1</td><td>9:00 AM</td><td>Inauguration</td><td>Main Auditorium</td></tr>
+      <tr><td>Day 1</td><td>10:30 AM</td><td>Paper Presentation</td><td>Seminar Hall A</td></tr>
+      <tr><td>Day 1</td><td>2:00 PM</td><td>Cloud and DevOps Basics</td><td>Lab 3</td></tr>
+      <tr><td>Day 1</td><td>6:00 PM</td><td>Hackathon begins</td><td>Innovation Centre</td></tr>
+      <tr><td>Day 2</td><td>9:30 AM</td><td>Web Design Challenge</td><td>Lab 1</td></tr>
+      <tr><td>Day 2</td><td>11:00 AM</td><td>Tech Quiz</td><td>Seminar Hall B</td></tr>
+      <tr><td>Day 2</td><td>2:00 PM</td><td>Project Expo</td><td>Atrium</td></tr>
+      <tr><td>Day 2</td><td>4:30 PM</td><td>Prize distribution</td><td>Main Auditorium</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="page" id="page-register" aria-labelledby="h-register">
+  <h1 id="h-register">Register</h1>
+  <p class="lead">Fields marked * are required.</p>
+  <form id="regform" action="/register" method="POST" novalidate>
+    <fieldset>
+      <legend>Your details</legend>
+      <div class="field">
+        <label for="name">Full name *</label>
+        <input type="text" id="name" name="name" autocomplete="name" required minlength="3" placeholder="e.g. Priya Raman" aria-describedby="name-err">
+        <p class="hint" id="name-err" role="alert"></p>
+      </div>
+      <div class="field">
+        <label for="email">Email address *</label>
+        <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@college.edu" aria-describedby="email-hint email-err">
+        <p class="hint" id="email-hint">We send your confirmation here.</p>
+        <p class="hint" id="email-err" role="alert"></p>
+      </div>
+      <div class="field">
+        <label for="phone">Mobile number</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" pattern="[0-9]{10}" placeholder="10 digits">
+      </div>
+      <div class="field">
+        <label for="college">College *</label>
+        <input type="text" id="college" name="college" required autocomplete="organization" aria-describedby="college-err">
+        <p class="hint" id="college-err" role="alert"></p>
+      </div>
+      <div class="field">
+        <label for="year">Year of study</label>
+        <select id="year" name="year">
+          <option value="1">First year</option><option value="2">Second year</option>
+          <option value="3">Third year</option><option value="4">Final year</option>
+        </select>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Events (choose up to 3)</legend>
+      <label class="check"><input type="checkbox" name="events" value="paper"> Paper Presentation</label>
+      <label class="check"><input type="checkbox" name="events" value="hackathon"> 24-hour Hackathon</label>
+      <label class="check"><input type="checkbox" name="events" value="webdesign"> Web Design Challenge</label>
+      <label class="check"><input type="checkbox" name="events" value="cloud"> Cloud and DevOps Basics</label>
+      <label class="check"><input type="checkbox" name="events" value="quiz"> Tech Quiz</label>
+      <label class="check"><input type="checkbox" name="events" value="expo"> Project Expo</label>
+      <p class="hint" id="events-err" role="alert"></p>
+    </fieldset>
+    <button class="btn" type="submit">Register for symposium</button>
+    <div id="result" aria-live="polite"></div>
+  </form>
+</section>
+
+<!-- FAQ -->
+<section class="page" id="page-faq" aria-labelledby="h-faq">
+  <h1 id="h-faq">FAQ</h1>
+  <details><summary>Who can register?</summary><p>Any engineering student with a valid college ID.</p></details>
+  <details><summary>Is there a registration fee?</summary><p>No. Registration is free and includes lunch and a participation certificate.</p></details>
+  <details><summary>What happens after I submit the form?</summary><p>The browser sends your details to the server in a POST request. The server replies with a confirmation, and we email you a registration ID.</p></details>
+  <details><summary>Can I change my events later?</summary><p>Yes. Write to the helpdesk before 10 November.</p></details>
+</section>
+
+<!-- CONTACT -->
+<section class="page" id="page-contact" aria-labelledby="h-contact">
+  <h1 id="h-contact">Contact</h1>
+  <div class="grid">
+    <address class="card" style="font-style:normal">
+      <h3>Symposium helpdesk</h3>
+      Department of Computer Science<br>
+      SIMATS Engineering, Chennai<br>
+      Email: <a href="mailto:symposium@example.edu">symposium@example.edu</a><br>
+      Phone: <a href="tel:+910000000000">+91 00000 00000</a>
+    </address>
+    <aside class="card"><h3>Helpdesk hours</h3><p>Monday to Friday, 10:00 AM to 4:00 PM.</p></aside>
+  </div>
+</section>
+
+<!-- NOT FOUND -->
+<section class="page" id="page-404" aria-labelledby="h-404">
+  <h1 id="h-404">Page not found</h1>
+  <p>That page does not exist. <a href="#/home">Go to the home page</a>.</p>
+</section>
+
+</div>
+</main>
+
+<footer class="site">
+<div class="wrap"><p>&copy; 2026 SIMATS Tech Symposium. Built with HTML5, semantic elements and no external dependencies.</p></div>
+</footer>
+
+<script>
+(function(){
+  var pages=['home','events','schedule','register','faq','contact'];
+  var navLinks=document.querySelectorAll('[data-nav]');
+  function route(){
+    var key=(location.hash||'#/home').replace(/^#\/?/,'')||'home';
+    if(pages.indexOf(key)<0) key='404';
+    document.querySelectorAll('.page').forEach(function(p){p.classList.toggle('active',p.id==='page-'+key)});
+    navLinks.forEach(function(a){
+      if(a.dataset.nav===key) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+    });
+    var h=document.querySelector('#page-'+key+' h1');
+    document.title=(h?h.textContent:'')+' | SIMATS Tech Symposium 2026';
+    window.scrollTo(0,0);
+    if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true});}
+  }
+  window.addEventListener('hashchange',route);
+  route();
+
+  // Theme toggle (storage guarded)
+  var root=document.documentElement,tb=document.getElementById('theme');
+  try{var saved=localStorage.getItem('theme');if(saved)root.setAttribute('data-theme',saved);}catch(e){}
+  tb.addEventListener('click',function(){
+    var dark=getComputedStyle(root).getPropertyValue('--bg').trim()==='#0e1815';
+    var next=dark?'light':'dark';
+    root.setAttribute('data-theme',next);
+    tb.setAttribute('aria-pressed',String(next==='dark'));
+    try{localStorage.setItem('theme',next);}catch(e){}
+  });
+
+  // Registration form
+  var form=document.getElementById('regform'),out=document.getElementById('result');
+  function setErr(id,msg){document.getElementById(id).textContent=msg;}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+  form.addEventListener('submit',function(e){
+    e.preventDefault(); // demo: no real server here
+    var ok=true,f=form.elements;
+    setErr('name-err',''); setErr('email-err',''); setErr('college-err',''); setErr('events-err','');
+    if(f.name.value.trim().length<3){setErr('name-err','Enter your full name (at least 3 characters).');ok=false;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())){setErr('email-err','Enter a valid email address, like you@college.edu.');ok=false;}
+    if(!f.college.value.trim()){setErr('college-err','Enter your college name.');ok=false;}
+    var chosen=[].slice.call(form.querySelectorAll('input[name="events"]:checked')).map(function(c){return c.value});
+    if(chosen.length===0){setErr('events-err','Choose at least one event.');ok=false;}
+    if(chosen.length>3){setErr('events-err','Choose no more than three events.');ok=false;}
+    if(f.phone.value && !/^[0-9]{10}$/.test(f.phone.value)){ok=false;out.innerHTML='<p class="msg err" role="alert">Mobile number must be exactly 10 digits.</p>';return;}
+    if(!ok){out.innerHTML='<p class="msg err" role="alert">Fix the highlighted fields and submit again.</p>';return;}
+    var body=['name='+encodeURIComponent(f.name.value.trim()),'email='+encodeURIComponent(f.email.value.trim()),
+      'phone='+encodeURIComponent(f.phone.value),'college='+encodeURIComponent(f.college.value.trim()),
+      'year='+f.year.value].concat(chosen.map(function(c){return 'events='+c})).join('&');
+    var id='SYM26-'+Math.floor(1000+Math.random()*9000);
+    out.innerHTML='<div class="msg ok"><strong>Registration received, '+esc(f.name.value.trim())+'.</strong> Your ID is '+id+'. A confirmation will go to '+esc(f.email.value.trim())+'.</div>'
+     +'<h2>What the browser sent</h2><pre>POST /register HTTP/1.1\nHost: symposium.example.edu\nContent-Type: application/x-www-form-urlencoded\nContent-Length: '+body.length+'\n\n'+esc(body)+'</pre>'
+     +'<h2>What the server replies</h2><pre>HTTP/1.1 200 OK\nContent-Type: text/html; charset=UTF-8\n\n&lt;h1&gt;Registration received&lt;/h1&gt; ... ID: '+id+'</pre>'
+     +'<p class="hint">This demo runs in the browser, so the request is shown rather than sent.</p>';
+    form.reset();
+    out.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>

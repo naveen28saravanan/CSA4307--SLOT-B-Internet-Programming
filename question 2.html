@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Company website rebuilt with valid, cross-browser HTML5">
+<title>Company</title>
+<style>
+:root{--bg:#faf7f2;--ink:#1d2433;--muted:#58627a;--card:#fff;--line:#ddd6c8;--brand:#2b3f8f;--brand-ink:#fff;--accent:#f0b429;--bad:#b3261e;--good:#146c3b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151f;--ink:#e8ebf5;--muted:#a3abc4;--card:#1b2030;--line:#2e3550;--brand:#8da2ff;--brand-ink:#0d1330;--accent:#f0b429;--bad:#ff8a80;--good:#6fdc9d}}
+:root[data-theme="dark"]{--bg:#12151f;--ink:#e8ebf5;--muted:#a3abc4;--card:#1b2030;--line:#2e3550;--brand:#8da2ff;--brand-ink:#0d1330;--accent:#f0b429;--bad:#ff8a80;--good:#6fdc9d}
+/* Cross-browser reset: same box model and margins everywhere */
+*,*::before,*::after{-webkit-box-sizing:border-box;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
+h1,h2,h3,nav,button,label,input,textarea,th{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+img,svg{max-width:100%}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:960px;margin:0 auto;padding:0 1rem}
+.skip{position:absolute;left:-999px;top:0;background:var(--brand);color:var(--brand-ink);padding:.5rem 1rem;z-index:9}
+.skip:focus{left:0}
+header.site{background:var(--brand);color:var(--brand-ink)}
+.top{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;padding:.8rem 0}
+.logo{font:700 1.25rem system-ui,sans-serif;color:inherit;text-decoration:none}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.25rem;margin:0;padding:0}
+nav a{display:block;padding:.5rem .8rem;border-radius:6px;color:inherit;text-decoration:none;font-weight:600}
+nav a:hover{background:rgba(255,255,255,.18)}
+nav a[aria-current="page"]{background:var(--accent);color:#1b1500}
+main{padding:2rem 0 3rem;min-height:60vh}
+.page{display:none}.page.active{display:block}
+h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.15;margin:.2em 0}
+h2{margin-top:1.8rem}
+.lead{font-size:1.2rem;color:var(--muted);max-width:60ch}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+@supports not (display:grid){.grid{display:flex;flex-wrap:wrap}.grid>*{flex:1 1 240px;margin:.5rem}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem}
+.card h3{margin:.1em 0 .4em}
+.btn{display:inline-block;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.7rem 1.3rem;font:600 1rem system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.btn.alt{background:transparent;color:var(--brand);border:2px solid var(--brand)}
+.cols{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.bad,.good{border-left:6px solid;padding:.2rem 1rem 1rem;border-radius:8px;background:var(--card);border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.bad{border-left-color:var(--bad)}.good{border-left-color:var(--good)}
+pre{background:#0f1526;color:#d7e0ff;padding:1rem;border-radius:8px;overflow-x:auto;font-size:.85rem;margin:.5rem 0;white-space:pre-wrap;word-break:break-word}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--card)}
+th,td{border:1px solid var(--line);padding:.6rem .8rem;text-align:left;vertical-align:top}
+thead th{background:var(--brand);color:var(--brand-ink)}
+.field{margin-bottom:1rem;max-width:520px}
+label{display:block;font-weight:600;margin-bottom:.25rem}
+input,textarea{width:100%;padding:.65rem;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:1rem system-ui,sans-serif}
+.msg{border:2px solid var(--good);border-radius:8px;padding:.8rem 1rem;margin-top:1rem;max-width:520px}
+ol li,ul.plain li{margin-bottom:.4rem}
+footer.site{border-top:1px solid var(--line);padding:1.2rem 0;color:var(--muted);font:.9rem system-ui,sans-serif}
+.themebtn{background:transparent;border:1px solid currentColor;color:inherit;border-radius:6px;padding:.35rem .7rem;cursor:pointer;font:600 .85rem system-ui,sans-serif}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site">
+<div class="wrap top">
+  <a class="logo" href="#/home">Company</a>
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="#/home" data-nav="home">Home</a></li>
+      <li><a href="#/about" data-nav="about">About us</a></li>
+      <li><a href="#/services" data-nav="services">Services</a></li>
+      <li><a href="#/contact" data-nav="contact">Contact</a></li>
+      <li><a href="#/report" data-nav="report">Compatibility report</a></li>
+    </ul>
+  </nav>
+  <button class="themebtn" id="theme" type="button">Toggle dark mode</button>
+</div>
+</header>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+<section class="page" id="page-home" aria-labelledby="h-home">
+  <h1 id="h-home">Welcome</h1>
+  <p class="lead">We build dependable software for growing businesses. This site renders the same in Chrome, Firefox, Safari and Edge because its HTML is valid and correctly nested.</p>
+  <p><a class="btn" href="#/services">Our services</a> <a class="btn alt" href="#/report">See what was fixed</a></p>
+  <div class="grid">
+    <article class="card"><h3>Reliable</h3><p>Tested on every major browser before release.</p></article>
+    <article class="card"><h3>Accessible</h3><p>Built with semantic elements and keyboard support.</p></article>
+    <article class="card"><h3>Standards first</h3><p>Validated against the W3C HTML specification.</p></article>
+  </div>
+</section>
+
+<section class="page" id="page-about" aria-labelledby="h-about">
+  <h1 id="h-about">About us</h1>
+  <p class="lead">Company is a small team of engineers and designers who care about clean, standards-based web work.</p>
+  <article class="card"><h3>Our approach</h3><p>We write valid markup first, then add styles and scripts on top. That keeps pages predictable across browsers and easier to maintain.</p></article>
+</section>
+
+<section class="page" id="page-services" aria-labelledby="h-services">
+  <h1 id="h-services">Services</h1>
+  <div class="grid">
+    <article class="card"><h3>Web development</h3><p>Responsive sites and web apps.</p></article>
+    <article class="card"><h3>Cross-browser testing</h3><p>Checks on desktop and mobile browsers.</p></article>
+    <article class="card"><h3>Accessibility audits</h3><p>WCAG-focused reviews and fixes.</p></article>
+  </div>
+</section>
+
+<section class="page" id="page-contact" aria-labelledby="h-contact">
+  <h1 id="h-contact">Contact</h1>
+  <form id="cform" action="/contact" method="POST" novalidate>
+    <div class="field"><label for="cname">Your name</label><input type="text" id="cname" name="name" autocomplete="name" required></div>
+    <div class="field"><label for="cmail">Email</label><input type="email" id="cmail" name="email" autocomplete="email" required></div>
+    <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" name="message" rows="4" required></textarea></div>
+    <button class="btn" type="submit">Send message</button>
+    <div id="cres" aria-live="polite"></div>
+  </form>
+</section>
+
+<!-- REPORT: answers Q2.1 to Q2.5 -->
+<section class="page" id="page-report" aria-labelledby="h-report">
+  <h1 id="h-report">Compatibility report</h1>
+  <p class="lead">The original snippet and what was done about it.</p>
+
+  <h2>1. Improper nesting and missing closing tags</h2>
+  <div class="cols">
+    <div class="bad"><h3>Original</h3>
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Company&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;
+&lt;h1&gt;Welcome
+&lt;p&gt;About us
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre></div>
+    <div class="card"><h3>Problems</h3>
+      <ul class="plain">
+        <li><code>&lt;h1&gt;</code> is never closed. The <code>&lt;p&gt;</code> ends up inside it, and a paragraph is not allowed inside a heading.</li>
+        <li><code>&lt;p&gt;</code> is never closed. A browser guesses where it ends.</li>
+        <li>No <code>&lt;!DOCTYPE html&gt;</code>, so browsers may switch to quirks mode.</li>
+        <li>No <code>lang</code>, <code>charset</code> or viewport meta tag.</li>
+      </ul></div>
+  </div>
+
+  <h2>2. How browsers interpret it</h2>
+  <p>Browsers do not stop on bad HTML. They repair it, and the repair rules differ in older engines and in quirks mode.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Issue</th><th>Possible effect</th></tr></thead>
+    <tbody>
+      <tr><td>Missing DOCTYPE</td><td>Quirks mode changes the box model, default font sizes and table inheritance, so spacing differs between browsers.</td></tr>
+      <tr><td>Unclosed <code>&lt;h1&gt;</code></td><td>The heading may swallow the paragraph, so it renders at heading size and weight in some engines and not in others.</td></tr>
+      <tr><td>Unclosed <code>&lt;p&gt;</code></td><td>The paragraph ends at the next block element, but older parsers can differ on margins and where it ends.</td></tr>
+      <tr><td>No CSS reset</td><td>Each browser applies its own default margins and fonts, so the layout shifts.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>3. Missing semantic elements</h2>
+  <p>The page uses only <code>&lt;div&gt;</code>. It needs <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code> and <code>&lt;footer&gt;</code>, so browsers, screen readers and search engines can see the page structure.</p>
+
+  <h2>4. Corrected W3C-compliant structure</h2>
+  <div class="good"><h3>Fixed</h3>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Company&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Welcome&lt;/h1&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;section&gt;
+      &lt;h2&gt;About us&lt;/h2&gt;
+      &lt;p&gt;We build dependable software.&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 Company&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre></div>
+  <p>This whole site is built on that structure.</p>
+
+  <h2>5. Techniques for cross-browser compatibility</h2>
+  <ol>
+    <li>Validate with the W3C Markup Validator and fix every error and warning.</li>
+    <li>Declare the DOCTYPE so browsers use standards mode.</li>
+    <li>Use a CSS reset or normalize so default styles match, and set <code>box-sizing: border-box</code>.</li>
+    <li>Use feature queries (<code>@supports</code>) and fallbacks, for example flexbox when grid is missing.</li>
+    <li>Add vendor prefixes automatically with Autoprefixer, and avoid unsupported features without a fallback.</li>
+    <li>Use relative units and media queries for responsive layouts.</li>
+    <li>Test in Chrome, Firefox, Safari and Edge, plus real mobile devices, with tools such as BrowserStack and DevTools device mode.</li>
+    <li>Check feature support on caniuse.com before relying on a new feature.</li>
+  </ol>
+</section>
+
+<section class="page" id="page-404" aria-labelledby="h-404">
+  <h1 id="h-404">Page not found</h1>
+  <p><a href="#/home">Go to the home page</a>.</p>
+</section>
+
+</div>
+</main>
+<footer class="site"><div class="wrap"><p>&copy; 2026 Company</p></div></footer>
+
+<script>
+(function(){
+  var pages=['home','about','services','contact','report'];
+  var links=document.querySelectorAll('[data-nav]');
+  function route(){
+    var key=(location.hash||'#/home').replace(/^#\/?/,'')||'home';
+    if(pages.indexOf(key)<0) key='404';
+    var ps=document.querySelectorAll('.page');
+    for(var i=0;i<ps.length;i++){ if(ps[i].id==='page-'+key) ps[i].classList.add('active'); else ps[i].classList.remove('active'); }
+    for(var j=0;j<links.length;j++){ if(links[j].getAttribute('data-nav')===key) links[j].setAttribute('aria-current','page'); else links[j].removeAttribute('aria-current'); }
+    var h=document.querySelector('#page-'+key+' h1');
+    document.title=(h?h.textContent:'Company')+' | Company';
+    window.scrollTo(0,0);
+    if(h){h.setAttribute('tabindex','-1');h.focus();}
+  }
+  window.addEventListener('hashchange',route); route();
+
+  var root=document.documentElement;
+  try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s);}catch(e){}
+  document.getElementById('theme').addEventListener('click',function(){
+    var dark=getComputedStyle(root).getPropertyValue('--bg').replace(/\s/g,'')==='#12151f';
+    var n=dark?'light':'dark'; root.setAttribute('data-theme',n);
+    try{localStorage.setItem('theme',n);}catch(e){}
+  });
+
+  document.getElementById('cform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=this.elements, res=document.getElementById('cres');
+    if(!f.name.value.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value)||!f.message.value.trim()){
+      res.innerHTML='<p class="msg" style="border-color:var(--bad)" role="alert">Fill in your name, a valid email and a message.</p>'; return;
+    }
+    res.innerHTML='<p class="msg">Message sent. We reply within two working days. (Demo: nothing is sent to a server.)</p>';
+    this.reset();
+  });
+})();
+</script>
+</body>
+</html>

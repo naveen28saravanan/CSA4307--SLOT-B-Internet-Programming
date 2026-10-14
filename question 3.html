@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Login portal with a corrected, secure form">
+<title>Campus Portal</title>
+<style>
+:root{--bg:#eef3f9;--ink:#14213d;--muted:#52607a;--card:#fff;--line:#cdd8e6;--brand:#1f4f9c;--brand-ink:#fff;--accent:#f2b705;--bad:#b3261e;--good:#146c3b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1522;--ink:#e7edf8;--muted:#9fb0cc;--card:#17213a;--line:#2b3957;--brand:#7fa8ff;--brand-ink:#08142e;--bad:#ff8a80;--good:#6fdc9d}}
+:root[data-theme="dark"]{--bg:#0e1522;--ink:#e7edf8;--muted:#9fb0cc;--card:#17213a;--line:#2b3957;--brand:#7fa8ff;--brand-ink:#08142e;--bad:#ff8a80;--good:#6fdc9d}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
+h1,h2,h3,nav,button,label,input,th{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:960px;margin:0 auto;padding:0 1rem}
+.skip{position:absolute;left:-999px;top:0;background:var(--brand);color:var(--brand-ink);padding:.5rem 1rem;z-index:9}
+.skip:focus{left:0}
+header.site{background:var(--brand);color:var(--brand-ink)}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;padding:.8rem 0}
+.logo{font:700 1.25rem system-ui,sans-serif;color:inherit;text-decoration:none}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.25rem;margin:0;padding:0}
+nav a,nav button.link{display:block;padding:.5rem .8rem;border-radius:6px;color:inherit;text-decoration:none;font:600 1rem system-ui,sans-serif;background:none;border:0;cursor:pointer}
+nav a:hover,nav button.link:hover{background:rgba(255,255,255,.18)}
+nav a[aria-current="page"]{background:var(--accent);color:#1b1500}
+main{padding:2rem 0 3rem;min-height:60vh}
+.page{display:none}.page.active{display:block}
+h1{font-size:clamp(1.7rem,5vw,2.6rem);line-height:1.15;margin:.2em 0}
+h2{margin-top:1.8rem}
+.lead{font-size:1.15rem;color:var(--muted);max-width:60ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.2rem}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.btn{display:inline-block;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.7rem 1.3rem;font:600 1rem system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.btn.alt{background:transparent;color:var(--brand);border:2px solid var(--brand)}
+form{max-width:440px}
+.field{margin-bottom:1rem}
+label{display:block;font-weight:600;margin-bottom:.25rem}
+input[type=text],input[type=password]{width:100%;padding:.65rem;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:1rem system-ui,sans-serif}
+.pw{display:flex;gap:.5rem}
+.pw button{white-space:nowrap}
+.hint{font:.85rem system-ui,sans-serif;color:var(--muted);margin:.2rem 0 0}
+.check{display:flex;gap:.6rem;align-items:center;font-weight:400}
+.check input{width:auto}
+.msg{border:2px solid;border-radius:8px;padding:.8rem 1rem;margin-top:1rem}
+.msg.err{border-color:var(--bad);color:var(--bad)}.msg.ok{border-color:var(--good)}
+pre{background:#0c1426;color:#d3e1ff;padding:1rem;border-radius:8px;overflow-x:auto;font-size:.85rem;margin:.5rem 0;white-space:pre-wrap;word-break:break-word}
+.cols{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.bad,.good{border-left:6px solid;padding:.2rem 1rem 1rem;border-radius:8px;background:var(--card);border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.bad{border-left-color:var(--bad)}.good{border-left-color:var(--good)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;background:var(--card)}
+th,td{border:1px solid var(--line);padding:.6rem .8rem;text-align:left;vertical-align:top}
+thead th{background:var(--brand);color:var(--brand-ink)}
+li{margin-bottom:.4rem}
+footer.site{border-top:1px solid var(--line);padding:1.2rem 0;color:var(--muted);font:.9rem system-ui,sans-serif}
+.themebtn{background:transparent;border:1px solid currentColor;color:inherit;border-radius:6px;padding:.35rem .7rem;cursor:pointer;font:600 .85rem system-ui,sans-serif}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site">
+<div class="wrap top">
+  <a class="logo" href="#/login">Campus Portal</a>
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="#/login" data-nav="login">Login</a></li>
+      <li><a href="#/dashboard" data-nav="dashboard">Dashboard</a></li>
+      <li><a href="#/forgot" data-nav="forgot">Forgot password</a></li>
+      <li><a href="#/analysis" data-nav="analysis">Form analysis</a></li>
+      <li><a href="#/get-vs-post" data-nav="get-vs-post">GET vs POST</a></li>
+    </ul>
+  </nav>
+  <button class="themebtn" id="theme" type="button">Toggle dark mode</button>
+</div>
+</header>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+<!-- LOGIN: corrected form -->
+<section class="page" id="page-login" aria-labelledby="h-login">
+  <h1 id="h-login">Log in</h1>
+  <p class="lead">Use the demo account: <strong>student</strong> / <strong>Simats@2026</strong></p>
+  <form id="loginform" action="/submit" method="POST" novalidate>
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" autocomplete="username" required autocapitalize="none" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <div class="pw">
+        <input type="password" id="password" name="password" autocomplete="current-password" required minlength="8">
+        <button class="btn alt" type="button" id="showpw" aria-pressed="false">Show</button>
+      </div>
+      <p class="hint">At least 8 characters.</p>
+    </div>
+    <button class="btn" type="submit">Log in</button>
+    <div id="lres" aria-live="polite"></div>
+  </form>
+</section>
+
+<!-- DASHBOARD -->
+<section class="page" id="page-dashboard" aria-labelledby="h-dash">
+  <h1 id="h-dash">Dashboard</h1>
+  <div id="dash-locked"><p class="msg err" role="alert">You are not logged in. <a href="#/login">Log in to continue</a>.</p></div>
+  <div id="dash-open" hidden>
+    <p class="lead" id="welcome"></p>
+    <div class="grid">
+      <article class="card"><h3>Attendance</h3><p>92% this semester.</p></article>
+      <article class="card"><h3>Assessments</h3><p>Assessment Tool 1 due soon.</p></article>
+      <article class="card"><h3>Timetable</h3><p>Internet Programming, 10:00 AM.</p></article>
+    </div>
+    <p><button class="btn alt" type="button" id="logout">Log out</button></p>
+  </div>
+</section>
+
+<!-- FORGOT -->
+<section class="page" id="page-forgot" aria-labelledby="h-forgot">
+  <h1 id="h-forgot">Forgot password</h1>
+  <form id="fform" action="/forgot" method="POST" novalidate>
+    <div class="field"><label for="fuser">Username</label><input type="text" id="fuser" name="username" autocomplete="username" required></div>
+    <button class="btn" type="submit">Send reset link</button>
+    <div id="fres" aria-live="polite"></div>
+  </form>
+</section>
+
+<!-- ANALYSIS: Q3.1 to Q3.5 -->
+<section class="page" id="page-analysis" aria-labelledby="h-analysis">
+  <h1 id="h-analysis">Form analysis</h1>
+  <h2>1. Issues in the form configuration</h2>
+  <div class="cols">
+    <div class="bad"><h3>Original</h3>
+<pre>&lt;form action="/submit" method="GET"&gt;
+  &lt;input type="text" name="username"&gt;
+  &lt;input type="password" name="password"&gt;
+  &lt;button type="button"&gt;Login&lt;/button&gt;
+&lt;/form&gt;</pre></div>
+    <div class="card"><h3>Problems</h3><ol>
+      <li><code>type="button"</code> does not submit the form. This is the main bug.</li>
+      <li><code>method="GET"</code> puts the password in the URL.</li>
+      <li>No <code>&lt;label&gt;</code> elements, so screen readers cannot name the fields.</li>
+      <li>No <code>required</code>, <code>autocomplete</code> or validation.</li>
+      <li>No HTTPS, CSRF protection or rate limiting.</li>
+    </ol></div>
+  </div>
+
+  <h2>2. Why the HTTP request is not triggered</h2>
+  <p>A <code>&lt;button type="button"&gt;</code> has no default action. The browser only builds and sends a request when a submit event fires, and that happens for <code>type="submit"</code> buttons (or an <code>&lt;input type="submit"&gt;</code>). With <code>type="button"</code> clicking does nothing unless JavaScript adds a handler, so no request leaves the browser.</p>
+
+  <h2>3. Role of GET in this scenario</h2>
+  <p>GET sends form data as a query string in the URL. If the button did submit, the browser would request:</p>
+<pre>GET /submit?username=student&amp;password=Simats%402026 HTTP/1.1</pre>
+  <p>The password would then appear in the address bar, browser history, server logs, proxy logs and the <code>Referer</code> header. GET is meant for safe, repeatable reads such as search, never for credentials. See the <a href="#/get-vs-post">GET vs POST demo</a>.</p>
+
+  <h2>4. Corrected implementation</h2>
+  <div class="good"><h3>Fixed</h3>
+<pre>&lt;form action="/submit" method="POST"&gt;
+  &lt;label for="username"&gt;Username&lt;/label&gt;
+  &lt;input type="text" id="username" name="username"
+         autocomplete="username" required&gt;
+
+  &lt;label for="password"&gt;Password&lt;/label&gt;
+  &lt;input type="password" id="password" name="password"
+         autocomplete="current-password" required minlength="8"&gt;
+
+  &lt;button type="submit"&gt;Log in&lt;/button&gt;
+&lt;/form&gt;</pre></div>
+  <p>The <a href="#/login">Login page</a> uses this exact structure.</p>
+
+  <h2>5. Improvements for secure data transmission</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Measure</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Serve over HTTPS (TLS)</td><td>Encrypts the request so passwords cannot be read in transit.</td></tr>
+      <tr><td>Use POST</td><td>Keeps credentials out of URLs, history and logs.</td></tr>
+      <tr><td>Hash passwords on the server</td><td>Use bcrypt or Argon2 with a salt, never plain text.</td></tr>
+      <tr><td>CSRF token</td><td>Stops other sites from submitting the form on a user's behalf.</td></tr>
+      <tr><td>Secure cookies</td><td>Set <code>HttpOnly</code>, <code>Secure</code> and <code>SameSite</code> on the session cookie.</td></tr>
+      <tr><td>Rate limiting and lockout</td><td>Slows brute-force guessing.</td></tr>
+      <tr><td>Server-side validation</td><td>Client checks can be bypassed.</td></tr>
+      <tr><td>HSTS and a CSP header</td><td>Forces HTTPS and limits script injection.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- GET vs POST demo -->
+<section class="page" id="page-get-vs-post" aria-labelledby="h-gvp">
+  <h1 id="h-gvp">GET vs POST</h1>
+  <p class="lead">Type a sample username and password to see how each method would send them. Nothing leaves your browser.</p>
+  <form id="demoform" novalidate>
+    <div class="field"><label for="du">Username</label><input type="text" id="du" value="student"></div>
+    <div class="field"><label for="dp">Password</label><input type="text" id="dp" value="Simats@2026"></div>
+    <button class="btn" type="submit">Show both requests</button>
+  </form>
+  <div id="gvp" aria-live="polite"></div>
+</section>
+
+<section class="page" id="page-404" aria-labelledby="h-404">
+  <h1 id="h-404">Page not found</h1>
+  <p><a href="#/login">Go to login</a>.</p>
+</section>
+
+</div>
+</main>
+<footer class="site"><div class="wrap"><p>&copy; 2026 Campus Portal. Demo only: no data is sent anywhere.</p></div></footer>
+
+<script>
+(function(){
+  var pages=['login','dashboard','forgot','analysis','get-vs-post'];
+  var links=document.querySelectorAll('[data-nav]');
+  var user=null; // in-memory session for the demo
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+  function drawDash(){
+    var open=document.getElementById('dash-open'),lock=document.getElementById('dash-locked');
+    if(user){open.hidden=false;lock.hidden=true;document.getElementById('welcome').textContent='Welcome back, '+user+'.';}
+    else{open.hidden=true;lock.hidden=false;}
+  }
+  function route(){
+    var key=(location.hash||'#/login').replace(/^#\/?/,'')||'login';
+    if(pages.indexOf(key)<0) key='404';
+    var ps=document.querySelectorAll('.page');
+    for(var i=0;i<ps.length;i++){ps[i].classList.toggle('active',ps[i].id==='page-'+key);}
+    for(var j=0;j<links.length;j++){ if(links[j].getAttribute('data-nav')===key) links[j].setAttribute('aria-current','page'); else links[j].removeAttribute('aria-current'); }
+    if(key==='dashboard') drawDash();
+    var h=document.querySelector('#page-'+key+' h1');
+    document.title=(h?h.textContent:'Campus Portal')+' | Campus Portal';
+    window.scrollTo(0,0);
+    if(h){h.setAttribute('tabindex','-1');h.focus();}
+  }
+  window.addEventListener('hashchange',route); route();
+
+  var root=document.documentElement;
+  try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s);}catch(e){}
+  document.getElementById('theme').addEventListener('click',function(){
+    var dark=getComputedStyle(root).getPropertyValue('--bg').replace(/\s/g,'')==='#0e1522';
+    var n=dark?'light':'dark'; root.setAttribute('data-theme',n);
+    try{localStorage.setItem('theme',n);}catch(e){}
+  });
+
+  var pw=document.getElementById('password'),sp=document.getElementById('showpw');
+  sp.addEventListener('click',function(){
+    var show=pw.type==='password'; pw.type=show?'text':'password';
+    sp.textContent=show?'Hide':'Show'; sp.setAttribute('aria-pressed',String(show));
+  });
+
+  document.getElementById('loginform').addEventListener('submit',function(e){
+    e.preventDefault(); // demo: no server
+    var u=this.elements.username.value.trim(),p=this.elements.password.value,out=document.getElementById('lres');
+    if(!u||p.length<8){out.innerHTML='<p class="msg err" role="alert">Enter your username and a password of at least 8 characters.</p>';return;}
+    var shown='POST /submit HTTP/1.1\nContent-Type: application/x-www-form-urlencoded\n\nusername='+encodeURIComponent(u)+'&password='+'*'.repeat(p.length);
+    if(u==='student'&&p==='Simats@2026'){
+      user=u;
+      out.innerHTML='<p class="msg ok">Login successful. <a href="#/dashboard">Open dashboard</a>.</p><pre>'+esc(shown)+'\n\nHTTP/1.1 302 Found\nLocation: /dashboard</pre><p class="hint">The password is masked here. On a real site it travels in the POST body over HTTPS.</p>';
+      this.reset();
+    }else{
+      out.innerHTML='<p class="msg err" role="alert">Wrong username or password. Check both and try again.</p><pre>'+esc(shown)+'\n\nHTTP/1.1 401 Unauthorized</pre>';
+    }
+  });
+
+  document.getElementById('logout').addEventListener('click',function(){user=null;location.hash='#/login';});
+
+  document.getElementById('fform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var u=this.elements.username.value.trim(),out=document.getElementById('fres');
+    out.innerHTML=u?'<p class="msg ok">If an account exists for '+esc(u)+', a reset link has been sent.</p>':'<p class="msg err" role="alert">Enter your username.</p>';
+  });
+
+  document.getElementById('demoform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var u=encodeURIComponent(document.getElementById('du').value),p=encodeURIComponent(document.getElementById('dp').value);
+    document.getElementById('gvp').innerHTML=
+      '<h2>GET (unsafe for passwords)</h2><pre>GET /submit?username='+esc(u)+'&amp;password='+esc(p)+' HTTP/1.1</pre><p class="msg err">The password is visible in the URL, history and logs.</p>'
+     +'<h2>POST (correct)</h2><pre>POST /submit HTTP/1.1\nContent-Type: application/x-www-form-urlencoded\n\nusername='+esc(u)+'&amp;password='+esc(p)+'</pre><p class="msg ok">The data sits in the request body, not the URL. Use HTTPS so it is also encrypted.</p>';
+  });
+})();
+</script>
+</body>
+</html>
